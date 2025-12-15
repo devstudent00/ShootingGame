@@ -59,6 +59,6 @@ void PlayScene::DrawGUI() {
 	ImGui::Text("PlayerHealth: %.2f", player->GetHealth());
 	ImGui::Text("Time: %.2f", time);
 	ImGui::Text("EnemyBullet: %d", enemyBullets.size());
-	ImGui::SliderFloat("float", &bulletCount, 0.0f, 200.0f);;
+	ImGui::SliderFloat("float", &bulletCount, 0.0f, 200.0f);
 	ImGui::End();
 }
