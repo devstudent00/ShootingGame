@@ -46,9 +46,7 @@ void PlayScene::Update()
 void PlayScene::Draw()
 {
 	GameUtil::DrawFixText(DrawType::RIGHT, Screen::WIDTH, 0, GetColor(255, 255, 255), GetColor(0, 0, 0),
-		std::string("Œ»Ý‚Ì‘Ì—Í: " + std::to_string(player->GetHealth()) + "\n" +
-					"“G‚Ì‘Ì—ÍF@" + std::to_string(enemy01->GetHealth())
-		)
+		std::string("Œ»Ý‚Ì‘Ì—Í: " + std::to_string(player->GetHealth()))
 	);
 	DrawString(0, 0, "PLAY SCENE", GetColor(255, 255, 255));
 	DrawString(100, 400, "Push [T]Key To Title", GetColor(255, 255, 255));
