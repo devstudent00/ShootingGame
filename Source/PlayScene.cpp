@@ -22,8 +22,8 @@ PlayScene::PlayScene()
 {
 	time = 0;
 	new Player(Screen::WIDTH / 2, Screen::HEIGHT - 100);
-	new Enemy01(400, 100);
-	new Enemy01(1000, 100);
+	new Enemy01("Enemy01_01", 400, 100);
+	new Enemy01("Enemy01_02", 1000, 100);
 
 	player = FindGameObject<Player>();
 	enemy01 = FindGameObject<Enemy01>();
@@ -60,5 +60,16 @@ void PlayScene::DrawGUI() {
 	ImGui::Text("Time: %.2f", time);
 	ImGui::Text("EnemyBullet: %d", enemyBullets.size());
 	ImGui::SliderFloat("float", &bulletCount, 0.0f, 200.0f);
+
+	//äeìGÇÃê›íË
+	for (auto enemy : FindGameObjects<Enemy01>()) {
+		string tag = enemy->GetTag();
+		float health = enemy->GetHealth();
+		ImGui::Text("EnemyTag: %s", tag.c_str());
+		ImGui::SliderFloat("health", &health, 1.0f, 100.0f);
+
+		enemy->SetHealth(health);
+	}
+	
 	ImGui::End();
 }

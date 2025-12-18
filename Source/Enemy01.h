@@ -1,10 +1,12 @@
 #pragma once
 #include "../Library/GameObject.h"
 
+using namespace std;
+
 class Enemy01 : public GameObject {
 public:
 	Enemy01();
-	Enemy01(int x, int y);
+	Enemy01(string tag, int x, int y);
 	~Enemy01();
 	void Update() override;
 	void Draw() override;
@@ -17,6 +19,7 @@ public:
 	bool CollideBullet(VECTOR3 centerPos, float radius);
 private:
 	int hImage;
+	int deadImage;
 	VECTOR3 position;
 	VECTOR3 velocity; //•ûŒü
 	int counter;

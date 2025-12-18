@@ -83,6 +83,8 @@ public:
 	/// <param name="_tag">タグ</param>
 	void SetTag(std::string _tag) { tag = _tag; }
 
+	std::string GetTag() const { return tag; }
+
 	/// <summary>
 	/// 指定されたタグと同じかを返す
 	/// </summary>

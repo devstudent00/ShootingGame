@@ -5,25 +5,29 @@
 #include "EnemyBullet.h"
 #include "PlayScene.h"
 
+using namespace std;
+
 namespace {
-	const int amplitude = 20; //振れ幅（※大きくすると幅が大きくなる）
-	const float period = 1.2f; //周期（※大きくすると、早くなる）
+	const int amplitude = 5; //振れ幅（※大きくすると幅が大きくなる）
+	const float period = 0.5f; //周期（※大きくすると、早くなる）
 	float angles = 0.1;
 }
 
 Enemy01::Enemy01()
 {
-	Enemy01(0, 0);
+	Enemy01("Enemy01", 0, 0);
 }
 
-Enemy01::Enemy01(int x, int y)
+Enemy01::Enemy01(string tag, int x, int y)
  : health(100){
 	counter = 0;
 	hImage = LoadGraph("data/images/enemy01.png");
+	deadImage = LoadGraph("data/images/enemyBroken.png");
 	assert(hImage > 0);
 	position.x = (float) x;
 	position.y = (float) y;
 	velocity = VECTOR3(0, 1, 0);
+	SetTag("Enemy01");
 }
 
 Enemy01::~Enemy01()
@@ -33,12 +37,13 @@ Enemy01::~Enemy01()
 void Enemy01::Update()
 {
 	if (health <= 0) {
+		hImage = deadImage;
 		DestroyMe();
 	}
 
 	counter++;
 	angles += 0.1;
-	if (counter >= bulletCount) {
+	if (counter >= bulletCount) { //定期的に球を発射
 		new EnemyBullet(position.x, position.y);
 		velocity.y = GetRand(3) + 1;
 		counter = 0;
@@ -46,8 +51,8 @@ void Enemy01::Update()
 
 	velocity.x = cos(angles * period) * amplitude;
 	
-	position += velocity;
-	if (position.y > Screen::HEIGHT - 16) {
+	position += velocity; //ベクトル分、下に移動する
+	if (position.y > Screen::HEIGHT - 16) { //画面外に出たら上に戻る
 		position.y = 0;
 		velocity.y = 1;
 	}
